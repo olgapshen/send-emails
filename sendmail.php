@@ -13,7 +13,7 @@ if (count($argv) != 8) {
 
 $filename = $argv[1];
 $mailfile = $argv[2];
-$mailtext = $argv[3]
+$mailtext = $argv[3];
 $domain = $argv[4];
 $subject = $argv[5];
 $from = $argv[6];
