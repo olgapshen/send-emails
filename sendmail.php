@@ -5,21 +5,23 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-if (count($argv) != 7) {
+if (count($argv) != 8) {
 	echo "Supply all parameters to script\r\n";
-	echo "Usage: php sendmail.php addresses mailbody domain subject from host\r\n";
+	echo "Usage: php sendmail.php addresses mailbody textbody domain subject from host\r\n";
 	die();
 }
 
 $filename = $argv[1];
 $mailfile = $argv[2];
-$domain = $argv[3];
-$subject = $argv[4];
-$from = $argv[5];
-$host = $argv[6];
+$mailtext = $argv[3]
+$domain = $argv[4];
+$subject = $argv[5];
+$from = $argv[6];
+$host = $argv[7];
 
 $contents = file($filename);
 $mailBody = file_get_contents($mailfile);
+$textBody = file_get_contents($mailtext);
 
 foreach($contents as $line) 
 {
@@ -56,7 +58,7 @@ foreach($contents as $line)
 		$mail->isHTML(true);                                  // Set email format to HTML
 		$mail->Subject = $subject;
 		$mail->Body    = $mailBody;
-
+		$mail->AltBody = $textBody;
 		$mail->send();
 		echo "Message has been sent\r\n";
 	} catch (Exception $e) {
